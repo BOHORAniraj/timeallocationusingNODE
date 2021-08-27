@@ -1,0 +1,20 @@
+# List of the API and terir request 
+
+### fetch all ticket api call
+GET http://localhost:8000/api/v1/
+
+### add new ticket
+POST http://localhost:8000/api/v1/
+Content-Type: application/json
+
+{
+    "task":"Gaming",
+    "hr" : 55
+}
+
+### update ticket
+PATCH http://localhost:8000/api/v1/
+
+### delete ticket
+
+DELETE http://localhost:8000/api/v1/
