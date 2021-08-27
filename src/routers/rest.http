@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {
     "task":"Gaming",
-    "hr" : 55
+    "hr" :5
 }
 
 ### update ticket

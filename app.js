@@ -5,6 +5,11 @@ import express from 'express';
 const app = express()
 
 const PORT = 8000;
+
+// Mongo Databsae connection
+
+import mongoClient from './src/config/db.js'
+mongoClient();
 //middleware
 app.use(express.urlencoded());
 app.use(express.json());

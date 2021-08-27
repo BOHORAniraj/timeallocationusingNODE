@@ -1,6 +1,8 @@
 import express from 'express'
 const route = express.Router()
-import {taskList} from '../assests/tickets.js'
+import { taskList } from '../assests/tickets.js'
+import { insertTicket } from '../modules/TaskList.Model.js'
+// import insertTicket from '../modules/'
 
 route.all("/",(req,res,next) =>{
     console.log("we got hit")
@@ -11,17 +13,20 @@ route.all("/",(req,res,next) =>{
 })
 
 //fetch the ticket
-route.get("/",(req,res) => {
-    console.log(taskList,'-----')
+route.get("/",async (req,res) => {
+    const taskLists = await getTasks()
+    console.log(taskLists)
 
-    res.json(taskList)
+    res.json({result:taskLists})
 })
  
 //add new ticket
-route.post("/",(req,res) => {
-    console.log(req.body)
+route.post("/",async(req,res) => {
+    
+    const result = await insertTicket(req.body);
+    console.log(result)
 
-    res.json(req.body)
+    res.json(result)
 })
 
 
