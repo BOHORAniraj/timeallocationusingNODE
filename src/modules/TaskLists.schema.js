@@ -16,7 +16,7 @@ const TicketListSchema = mongoose.Schema({
     todo: {
         type: Boolean,
         required: true,
-        // default:true,
+        default:true,
     }
 },
     {

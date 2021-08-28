@@ -8,8 +8,8 @@ POST http://localhost:8000/api/v1/
 Content-Type: application/json
 
 {
-     "task":"ni",
-    "hr" :58,
+     "task":"newdata1",
+    "hr" :545,
     "todo": false
 }
 
@@ -18,7 +18,7 @@ PATCH http://localhost:8000/api/v1/
 Content-Type: application/json
 
 {
-    "id":"6128a756e2f89f4b9ec59813",
+    "id":"61296d8bf9754b15c2814604",
     "todo":"false"
 }
 
@@ -32,5 +32,5 @@ DELETE http://localhost:8000/api/v1/
 Content-Type: application/json
 
 {
-   "id" : "6128a59a400a746a48f214a5"
+   "id" : ["6128a59a400a746a48f214a5" ,"6128a756e2f89f4b9ec59813","6128a761e2f89f4b9ec59815"]
 }

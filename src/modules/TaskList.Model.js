@@ -47,7 +47,7 @@ export const getATask = (_id) => {
 }
 
 
-export const deleteTask = (_id) => {
+export const deleteTask = (ids) => {
     return new Promise((resolve, reject) => {
         TicketListSchema.deleteMany({
             _id: {
@@ -66,7 +66,11 @@ export const updateTodo = ({id,todo}) => {
     return new Promise((resolve, reject) => {
         TicketListSchema.findByIdAndUpdate(id, {
             todo,
-        }).then((result) => resolve(result))
+        },
+            {
+                new:true,
+            }
+        ).then((result) => resolve(result))
         .catch((error) => reject(error))
     })
 }
