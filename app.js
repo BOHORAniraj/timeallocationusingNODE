@@ -1,8 +1,10 @@
 import express from 'express';
+import helmet from 'helmet';
 
 // const express = require('express')
 
 const app = express()
+import morgan from 'morgan'
 
 const PORT = 8000;
 
@@ -13,6 +15,8 @@ mongoClient();
 //middleware
 app.use(express.urlencoded());
 app.use(express.json());
+app.use(morgan('tiny'));
+app.use(helmet())
 
 
 import routers from './src/routers/index.js'

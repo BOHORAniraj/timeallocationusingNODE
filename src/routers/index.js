@@ -1,7 +1,7 @@
 import express from 'express'
 const route = express.Router()
 import { taskList } from '../assests/tickets.js'
-import { insertTicket } from '../modules/TaskList.Model.js'
+import { insertTicket, getTasks , getATask, deleteTask, updateTodo } from '../modules/TaskList.Model.js'
 // import insertTicket from '../modules/'
 
 route.all("/",(req,res,next) =>{
@@ -13,33 +13,76 @@ route.all("/",(req,res,next) =>{
 })
 
 //fetch the ticket
-route.get("/",async (req,res) => {
-    const taskLists = await getTasks()
-    console.log(taskLists)
+route.get("/:id?", async (req, res) => {
+    try {
+        const { id } = req.params
+    console.log(id)
+        if (id) {
+            const result = await getATask(id)
+            res.json(result)
+        }
+        else {
+            const taskLists = await getTasks()
+            res.json({result:taskLists})
 
-    res.json({result:taskLists})
+        }    
+    } catch (error) {
+        console.log(error)
+        res.json({message: "we are unable to process your request "})
+        
+    }
 })
  
 //add new ticket
-route.post("/",async(req,res) => {
+route.post("/", async (req,res) => {
+    try {
+        const result = await insertTicket(req.body);
     
-    const result = await insertTicket(req.body);
-    console.log(result)
 
     res.json(result)
+        
+    } catch (error) {
+        console.log(error)
+        // reject(error)
+        
+    }
+    
 })
 
 
 //patch ticket
-route.patch("/",(req,res) => {
+route.patch("/", async(req, res) => {
+    
+    try {
+    if (!req.body.id) {
+        return res.json({status:'error', message:'invalid id request'})
+    }
+    
+        const result = await updateTodo(req.body)
+    res.json(result)
 
-    res.json({message: 'this req will update the ticket from  database '})
+    } catch (error) {
+        res.json({
+            status: 'error',
+            message:"unable to process"
+        })
+        
+    }
+    
 })
 
 //delete ticket
-route.delete("/",(req,res) => {
+route.delete("/", async (req, res) => {
+    
+        const { id } = req.body
+        if (!id) {
+            return  res.json({status :'error', message: 'invalid id request'})
+        }
+        console.log(id)
+        const result = await deleteTask(id)
+        res.json(result)
 
-    res.json({message: 'this req will delete the ticket from  database '})
+    
 })
 
 export default route

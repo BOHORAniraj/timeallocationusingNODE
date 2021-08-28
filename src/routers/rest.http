@@ -8,13 +8,29 @@ POST http://localhost:8000/api/v1/
 Content-Type: application/json
 
 {
-    "task":"Gaming",
-    "hr" :5
+     "task":"ni",
+    "hr" :58,
+    "todo": false
 }
 
 ### update ticket
 PATCH http://localhost:8000/api/v1/
+Content-Type: application/json
+
+{
+    "id":"6128a756e2f89f4b9ec59813",
+    "todo":"false"
+}
+
+
+
+
 
 ### delete ticket
 
 DELETE http://localhost:8000/api/v1/
+Content-Type: application/json
+
+{
+   "id" : "6128a59a400a746a48f214a5"
+}

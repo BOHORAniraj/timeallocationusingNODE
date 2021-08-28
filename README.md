@@ -12,7 +12,7 @@ insall globally in your system,if you donot have then run 'npm i -g nodemon'
 
 -all the api endpoint will follow the 'rootUrl/api/v1
 
-| #   | API | Method | Description                            |
-| --- | --- | ------ | -------------------------------------- |
-| 1.  | `/` | GET    | fetch all the tickett list from server |
-| 2.  | `/` | POST   | ADD new ticket in tthe database        |
+| #   | API | Method | Description                                                                                |
+| --- | --- | ------ | ------------------------------------------------------------------------------------------ |
+| 1.  | `/` | GET    | fetch single task if @id param is provided other wise fetch all the tasks list from server |
+| 2.  | `/` | POST   | ADD new ticket in tthe database                                                            |
