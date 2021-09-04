@@ -1,11 +1,11 @@
 import express from 'express'
 const route = express.Router()
-import { taskList } from '../assests/tickets.js'
-import { insertTicket, getTasks , getATask, deleteTask, updateTodo } from '../modules/TaskList.Model.js'
-// import insertTicket from '../modules/'
 
-route.all("/",(req,res,next) =>{
-    console.log("we got hit")
+import { insertTicket, getTasks , getATask, deleteTasks, updateTodo } from '../modules/TaskList.Model.js'
+
+
+route.all('/',(req,res,next) =>{
+   
     next()
     
     
@@ -13,10 +13,10 @@ route.all("/",(req,res,next) =>{
 })
 
 //fetch the ticket
-route.get("/:id?", async (req, res) => {
+route.get('/:id?', async (req, res) => {
     try {
-        const { id } = req.params
-    console.log(id)
+        const { id }  = req.params
+    
         if (id) {
             const result = await getATask(id)
             res.json(result)
@@ -28,22 +28,22 @@ route.get("/:id?", async (req, res) => {
         }    
     } catch (error) {
         console.log(error)
-        res.json({message: "we are unable to process your request "})
+        res.json({
+            message: "we are unable to process your request ",
+        })
         
     }
 })
  
 //add new ticket
-route.post("/", async (req,res) => {
+route.post('/', async (req,res) => {
     try {
         const result = await insertTicket(req.body);
-    
-
-    res.json(result)
+        res.json(result)
         
     } catch (error) {
         console.log(error)
-        // reject(error)
+        res.json({message: error.message})
         
     }
     
@@ -51,7 +51,7 @@ route.post("/", async (req,res) => {
 
 
 //patch ticket
-route.patch("/", async(req, res) => {
+route.patch('/', async(req, res) => {
     
     try {
     if (!req.body.id) {
@@ -59,7 +59,8 @@ route.patch("/", async(req, res) => {
     }
     
         const result = await updateTodo(req.body)
-    res.json(result)
+        const msg = result ? 'Selected data updated' : 'Nothing is updated'
+        res.json({msg , result })
 
     } catch (error) {
         res.json({
@@ -73,14 +74,26 @@ route.patch("/", async(req, res) => {
 
 //delete ticket
 route.delete("/", async (req, res) => {
-    
-        const { id } = req.body
-        if (!id) {
+    try {
+        const { ids } = req.body
+        if (!ids) {
             return  res.json({status :'error', message: 'invalid id request'})
         }
-        console.log(id)
-        const result = await deleteTask(id)
-        res.json(result)
+       
+    const result = await deleteTasks(ids)
+   
+    res.json({
+            status :'success',message:'selected task has been deleted'
+        })
+        
+    } catch (error) {
+        res.json({
+            status: "error",
+            message :'error,unable to delete the selected task'
+        })
+        
+    }
+        
 
     
 })

@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 const TicketListSchema = mongoose.Schema({
     task: {
         type: String,
-        required: [true, 'task is required'],
+        required: true,
         default:'',
        
     },
