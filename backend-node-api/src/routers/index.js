@@ -39,11 +39,15 @@ route.get('/:id?', async (req, res) => {
 route.post('/', async (req,res) => {
     try {
         const result = await insertTicket(req.body);
-        res.json(result)
+        res.json({
+            status: result._id ? 'success' : 'error',
+            message: result._id ? 'ticket has been added' : 'error, unable to add the ticket',
+            result,
+        })
         
     } catch (error) {
         console.log(error)
-        res.json({message: error.message})
+        res.json({status:'error' ,message: error.message})
         
     }
     
@@ -83,7 +87,7 @@ route.delete("/", async (req, res) => {
     const result = await deleteTasks(ids)
    
     res.json({
-            status :'success',message:'selected task has been deleted'
+            status :'success',message:'selected task has been deleted',result,
         })
         
     } catch (error) {

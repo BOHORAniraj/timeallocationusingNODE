@@ -1,18 +1,12 @@
-#not to do backend apo
-tihs is the backend api for our not to do react app
+#not to do full stack app
+This project is deploying on heroku
+-this is the monorrpo for our not to do full stack application
 
-# how to use
+## how to use
 
--clone the project
--run 'npm install'
--make sure to have 'nodemon'
-insall globally in your system,if you donot have then run 'npm i -g nodemon'
-
-# API Endpoints
-
--all the api endpoint will follow the 'rootUrl/api/v1
-
-| #   | API | Method | Description                                                                                |
-| --- | --- | ------ | ------------------------------------------------------------------------------------------ |
-| 1.  | `/` | GET    | fetch single task if @id param is provided other wise fetch all the tasks list from server |
-| 2.  | `/` | POST   | ADD new ticket in tthe database                                                            |
+-run 'clone the repo'
+-run 'npm insall' from the root dir , for the node backend
+-'cd react-frontend-app'
+-run 'npm install' to install all the ract dependency
+-'cd ..' back to the root folfder
+-'run nom start
